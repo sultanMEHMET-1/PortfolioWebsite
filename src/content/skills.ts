@@ -3,19 +3,18 @@ import type { SkillGroup } from "./types";
 export const skills: readonly SkillGroup[] = [
     {
         groupName: "Languages",
-        skills: ["TypeScript", "JavaScript", "Python"],
+        skills: ["Python", "Java", "C/C++", "SystemVerilog", "R"],
     },
     {
-        groupName: "Frontend",
-        skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+        groupName: "Hardware & Embedded",
+        skills: ["STM32", "FPGA", "Internet of Things (IoT)", "LiDAR", "ROS"],
     },
     {
-        groupName: "Backend",
-        skills: ["Node.js", "REST APIs"],
+        groupName: "Data & Tools",
+        skills: ["Pandas", "NumPy", "OpenCV", "High-Performance Computing (HPC)"],
     },
     {
-        groupName: "Tools & Practices",
-        skills: ["Git", "CI/CD", "Testing"],
+        groupName: "Soft Skills & Languages",
+        skills: ["Presentation Skills", "Mentorship", "Turkish (Native)", "English (Native)"],
     },
-    // TODO: Update these skill groups with your actual skills from LinkedIn.
 ];

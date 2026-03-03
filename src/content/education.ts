@@ -2,14 +2,21 @@ import type { EducationItem } from "./types";
 
 export const education: readonly EducationItem[] = [
     {
-        id: "edu-1",
-        school: "TODO: University Name",
-        degree: "TODO: Degree and Major",
-        startDate: "2019",
-        endDate: "2023",
+        id: "purdue",
+        school: "Purdue University",
+        degree: "Bachelor's degree, Computer Science (Honors College), Minors: ECE, Math",
+        startDate: "2023",
+        endDate: "2027",
         highlights: [
-            "TODO: Add relevant coursework, honors, or activities",
+            "Focus: Digital Design, Embedded Software Engineering",
         ],
     },
-    // TODO: Add education items from your LinkedIn profile.
+    {
+        id: "syosset-hs",
+        school: "Syosset High School",
+        degree: "High School Diploma",
+        startDate: "2019", // estimated based on FIRST Robotics from Sep 2019 - 2023
+        endDate: "2023",
+        highlights: [],
+    },
 ];

@@ -12,6 +12,7 @@ const navLinks = [
     { href: "/about", label: "About" },
     { href: "/experience", label: "Experience" },
     { href: "/projects", label: "Projects" },
+    { href: "/resume", label: "Resume" },
     { href: "/contact", label: "Contact" },
 ] as const;
 
@@ -40,8 +41,8 @@ export function Header(): ReactNode {
                                     key={link.href}
                                     href={link.href}
                                     className={`relative rounded-md px-3 py-2 text-sm font-medium transition-colors ${isActive
-                                            ? "text-accent"
-                                            : "text-muted hover:text-foreground"
+                                        ? "text-accent"
+                                        : "text-muted hover:text-foreground"
                                         }`}
                                     aria-current={isActive ? "page" : undefined}
                                 >

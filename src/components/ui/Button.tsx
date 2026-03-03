@@ -34,6 +34,7 @@ interface ButtonProps {
     readonly disabled?: boolean;
     readonly target?: string;
     readonly rel?: string;
+    readonly download?: string;
     readonly "aria-label"?: string;
 }
 
@@ -48,6 +49,7 @@ export function Button({
     disabled,
     target,
     rel,
+    download,
     "aria-label": ariaLabel,
 }: ButtonProps): ReactNode {
     const { reducedMotion } = useMotion();
@@ -71,6 +73,7 @@ export function Button({
                 className={baseClasses}
                 target={target}
                 rel={rel}
+                download={download}
                 aria-label={ariaLabel}
                 {...motionConfig}
             >

@@ -33,9 +33,11 @@ export function EducationList({ items }: EducationListProps): ReactNode {
                                 <p className="mt-1 text-sm font-medium text-accent">
                                     {item.school}
                                 </p>
-                                <p className="mt-1 text-sm text-muted">
-                                    {formatDateRange(item.startDate, item.endDate)}
-                                </p>
+                                {formatDateRange(item.startDate, item.endDate) && (
+                                    <p className="mt-1 text-sm text-muted">
+                                        {formatDateRange(item.startDate, item.endDate)}
+                                    </p>
+                                )}
                                 {item.highlights.length > 0 && (
                                     <ul className="mt-3 space-y-1">
                                         {item.highlights.map((h, i) => (

@@ -23,6 +23,10 @@ export function formatDate(dateStr: string | null | undefined): string {
 /**
  * Build a date range string like "Jan 2023 – Present".
  */
-export function formatDateRange(start: string, end: string | null): string {
+export function formatDateRange(start: string | null | undefined, end: string | null | undefined): string {
+    if (!start && !end) return "";
+    if (!start) return formatDate(end);
+    if (!end) return `${formatDate(start)} – Present`;
+    if (start === end) return formatDate(start);
     return `${formatDate(start)} – ${formatDate(end)}`;
 }

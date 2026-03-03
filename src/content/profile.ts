@@ -15,8 +15,8 @@ export const profile: Person = {
         },
         {
             platform: "Email",
-            url: "mailto:mercanmeh1234@gmail.com",
-            label: "mercanmeh1234@gmail.com",
+            url: "mailto:mercanmeh123@gmail.com",
+            label: "mercanmeh123@gmail.com",
         },
     ],
 };

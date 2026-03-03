@@ -40,8 +40,8 @@ export interface EducationItem {
     readonly id: string;
     readonly school: string;
     readonly degree: string;
-    readonly startDate: string;
-    readonly endDate: string;
+    readonly startDate?: string | null;
+    readonly endDate?: string | null;
     readonly highlights: readonly string[];
 }
 

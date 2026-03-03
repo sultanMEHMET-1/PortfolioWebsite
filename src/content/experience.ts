@@ -34,9 +34,9 @@ export const experience: readonly ExperienceItem[] = [
         endDate: "2025-12",
         location: "West Lafayette, IN",
         highlights: [
-            "Designed and implemented FPGA-based digital signal processing (DSP) modules for real-time autotuning.",
-            "Programmed FPGA logic using SystemVerilog to realize low-latency, efficient signal transformations.",
-            "Optimized HDL modules for timing and resource efficiency, enhancing the core’s responsiveness during live signal processing.",
+            "Implemented Fast Fourier Transform IP blocks in SystemVerilog for real-time, low latency Digital Signal Processing workloads.",
+            "Designed Register-Transfer Level designs for algorithmic logic flow and integrated modules with FPGA-based hardware systems.",
+            "Optimized HDL modules for resource-constrained environments, increasing processing efficiency under limited multipliers.",
         ],
     },
     {
@@ -60,9 +60,8 @@ export const experience: readonly ExperienceItem[] = [
         endDate: "2025-11",
         location: "West Lafayette, IN",
         highlights: [
-            "Implemented autonomous navigation algorithms stemming from A* to reliably traverse in simulated lunar environments.",
-            "Integrated LiDAR sensors with control systems to improve excavation accuracy and obstacle detection.",
-            "Optimized communication between software modules with ROS to ensure realtime decision making during missions.",
+            "Implemented autonomous navigation algorithms inspired by A* search to traverse simulated lunar terrain quickly and efficiently.",
+            "Converted legacy competition codebase from ROS1 to ROS2, reducing latency by 20% and improving system responsiveness.",
         ],
     },
     {
@@ -73,9 +72,9 @@ export const experience: readonly ExperienceItem[] = [
         endDate: "2024-08",
         location: "New York, NY",
         highlights: [
-            "Designed and implemented an automated defect detection system using a camera mounted to a 3D printer platform.",
-            "Wrote Python scripts integrating OpenCV to identify silicon wafer defects critical for photolithography.",
-            "Contributed to semiconductor analysis for high-precision chip manufacturing under professional mentorship.",
+            "Built an automated defect detection system for silicon wafers using Python, OpenCV, and a 3D printer-mounted camera.",
+            "Optimized the image processing pipeline to improve defect detection accuracy and throughput across multiple wafer types.",
+            "Collaborated with research mentors to enhance the project’s sustainability for ongoing semiconductor studies.",
         ],
     },
     {

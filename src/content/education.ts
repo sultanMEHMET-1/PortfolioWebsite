@@ -7,7 +7,9 @@ export const education: readonly EducationItem[] = [
         degree: "Bachelor's degree, Computer Science (Honors College), Minors: ECE, Math",
         endDate: "2027",
         highlights: [
+            "GPA: 4.0",
             "Focus: Digital Design, Embedded Software Engineering",
+            "Relevant Coursework: Discrete Math, Object Oriented Programming, Programming in C, Linear Algebra, Statistical Methods",
         ],
     },
     {

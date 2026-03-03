@@ -3,15 +3,15 @@ import type { SkillGroup } from "./types";
 export const skills: readonly SkillGroup[] = [
     {
         groupName: "Languages",
-        skills: ["Python", "Java", "C/C++", "SystemVerilog", "R"],
+        skills: ["C", "C++", "Python", "Java", "SystemVerilog", "R"],
     },
     {
         groupName: "Hardware & Embedded",
-        skills: ["STM32", "FPGA", "Internet of Things (IoT)", "LiDAR", "ROS"],
+        skills: ["MicroControllers (ESP32, STM32)", "FPGA", "CAN", "HDL", "RTL Diagrams", "PCB Design", "Internet of Things (IoT)", "LiDAR", "ROS"],
     },
     {
         groupName: "Data & Tools",
-        skills: ["Pandas", "NumPy", "OpenCV", "High-Performance Computing (HPC)"],
+        skills: ["Pandas", "NumPy", "OpenCV", "Git/GitHub", "Linux", "High-Performance Computing (HPC)"],
     },
     {
         groupName: "Soft Skills & Languages",

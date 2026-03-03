@@ -18,5 +18,10 @@ export const profile: Person = {
             url: "mailto:mercanmeh123@gmail.com",
             label: "mercanmeh123@gmail.com",
         },
+        {
+            platform: "GitHub",
+            url: "https://github.com/sultanMEHMET-1",
+            label: "GitHub",
+        },
     ],
 };

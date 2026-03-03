@@ -67,4 +67,33 @@ export const projects: readonly ProjectItem[] = [
         ],
         featured: false,
     },
+    {
+        id: "sumobot",
+        name: "Sumobot",
+        description:
+            "A personal project integrating Arduino Uno, KiCAD, C, Embedded Systems, and PID Control.",
+        tech: ["C", "Arduino Uno", "KiCAD", "PID Control", "PCB Design"],
+        links: [],
+        highlights: [
+            "Designed and fabricated a custom PCB, integrating over 15 external components including sensors, motors, and power circuitry.",
+            "Programmed modular firmware in C, implementing reusable driver code through header files for efficient hardware abstraction.",
+            "Developed a fully autonomous control system enabling the robot to detect, pursue, and evade opponents in real-time.",
+            "Calibrated and tuned PID-based motor control for precise maneuvering, responsiveness, and stability under variable conditions.",
+        ],
+        featured: true,
+    },
+    {
+        id: "focusup",
+        name: "FocusUp!",
+        description:
+            "A project built during the Hello World Hackathon (placed 5th overall among 410 participants) meant to help correct posture using vision-based tracking.",
+        tech: ["TypeScript", "React", "Next.js", "MediaPipe", "Computer Vision"],
+        links: [],
+        highlights: [
+            "Placed 5th overall among 410 participants with a project meant to help correct posture using vision-based tracking.",
+            "Implemented the blink + slouch detection algorithms by implementing MediaPipe and designed the focus score logic for feedback.",
+            "Gained hands-on experience in web development, real-time computer vision, and agile teamwork under a 24-hour deadline.",
+        ],
+        featured: true,
+    },
 ];

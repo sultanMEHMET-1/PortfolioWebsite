@@ -4,6 +4,8 @@ import { ScrollReveal } from "@/components/motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { profile } from "@/content/profile";
+import { Scene } from "@/components/three/Scene";
+import { ThreeErrorBoundary } from "@/components/three/ThreeErrorBoundary";
 import type { ReactNode } from "react";
 
 export function Hero(): ReactNode {
@@ -19,6 +21,10 @@ export function Hero(): ReactNode {
                 }}
                 aria-hidden
             />
+
+            <ThreeErrorBoundary>
+                <Scene />
+            </ThreeErrorBoundary>
 
             <Container>
                 <div className="max-w-2xl">

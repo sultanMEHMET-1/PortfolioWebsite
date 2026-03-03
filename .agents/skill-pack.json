@@ -1,0 +1,121 @@
+{
+  "version": "2.0",
+  "name": "frontend-skill-pack",
+  "purpose": "Deliver polished, intentional frontends with repeatable validation, strong visual taste, and concrete implementation guidance.",
+  "read_order": [
+    "AGENTS.md",
+    "policies/definition-of-done.md",
+    "policies/creative-constraints.md",
+    "policies/quality-gates.md",
+    "skills/tokens-reference.md",
+    "skills/visual-taste.md",
+    "skills/layout-systems.md",
+    "skills/typography.md",
+    "skills/color-system.md",
+    "skills/motion-design.md",
+    "skills/micro-interactions.md",
+    "skills/scroll-animation.md",
+    "skills/3d-effects.md",
+    "skills/component-system.md",
+    "skills/design-system-literacy.md",
+    "skills/ux-heuristics.md",
+    "skills/responsive.md",
+    "skills/accessibility.md",
+    "skills/real-world-validation.md",
+    "skills/performance.md",
+    "skills/visual-references.md",
+    "playbooks/frontend-remake.md",
+    "playbooks/landing-page.md",
+    "playbooks/portfolio-upgrade.md"
+  ],
+  "framework_detection": {
+    "next": ["next.config.js", "next.config.ts", "next.config.mjs"],
+    "vite": ["vite.config.js", "vite.config.ts"],
+    "astro": ["astro.config.mjs", "astro.config.ts"],
+    "remix": ["remix.config.js", "remix.config.ts"],
+    "plain_html": ["index.html"]
+  },
+  "skills": [
+    {"id": "tokens-reference", "file": "skills/tokens-reference.md", "required": true, "tags": ["spacing", "radius", "shadow", "foundation"]},
+    {"id": "visual-taste", "file": "skills/visual-taste.md", "required": true, "tags": ["hierarchy", "composition", "asymmetry"]},
+    {"id": "layout-systems", "file": "skills/layout-systems.md", "required": true, "tags": ["grid", "spacing", "container"]},
+    {"id": "typography", "file": "skills/typography.md", "required": true, "tags": ["type-scale", "readability", "fluid"]},
+    {"id": "color-system", "file": "skills/color-system.md", "required": true, "tags": ["tokens", "contrast", "oklch"]},
+    {"id": "motion-design", "file": "skills/motion-design.md", "required": false, "tags": ["animation", "transitions", "easing"]},
+    {"id": "micro-interactions", "file": "skills/micro-interactions.md", "required": false, "tags": ["hover", "focus", "feedback"]},
+    {"id": "scroll-animation", "file": "skills/scroll-animation.md", "required": false, "tags": ["gsap", "scrolltrigger", "parallax"]},
+    {"id": "3d-effects", "file": "skills/3d-effects.md", "required": false, "tags": ["threejs", "webgl", "r3f"]},
+    {"id": "component-system", "file": "skills/component-system.md", "required": true, "tags": ["variants", "consistency", "cva"]},
+    {"id": "design-system-literacy", "file": "skills/design-system-literacy.md", "required": false, "tags": ["primitives", "radix", "shadcn"]},
+    {"id": "ux-heuristics", "file": "skills/ux-heuristics.md", "required": false, "tags": ["cognitive-load", "hierarchy", "disclosure"]},
+    {"id": "responsive", "file": "skills/responsive.md", "required": true, "tags": ["breakpoints", "mobile", "touch"]},
+    {"id": "accessibility", "file": "skills/accessibility.md", "required": true, "tags": ["keyboard", "aria", "contrast"]},
+    {"id": "real-world-validation", "file": "skills/real-world-validation.md", "required": true, "tags": ["screenshots", "tests", "playwright"]},
+    {"id": "performance", "file": "skills/performance.md", "required": true, "tags": ["speed", "stability", "vitals"]},
+    {"id": "visual-references", "file": "skills/visual-references.md", "required": false, "tags": ["inspiration", "rhythm", "adaptation"]}
+  ],
+  "policies": [
+    {"id": "definition-of-done", "file": "policies/definition-of-done.md", "required": true},
+    {"id": "creative-constraints", "file": "policies/creative-constraints.md", "required": true},
+    {"id": "quality-gates", "file": "policies/quality-gates.md", "required": true}
+  ],
+  "playbooks": [
+    {"id": "frontend-remake", "file": "playbooks/frontend-remake.md"},
+    {"id": "landing-page", "file": "playbooks/landing-page.md"},
+    {"id": "portfolio-upgrade", "file": "playbooks/portfolio-upgrade.md"}
+  ],
+  "tooling": {
+    "validation": [
+      {
+        "name": "Playwright MCP",
+        "kind": "mcp",
+        "repo": "microsoft/playwright-mcp",
+        "capabilities": ["browser automation", "screenshots", "viewport testing", "interaction testing", "DOM inspection"]
+      },
+      {
+        "name": "Lighthouse CI",
+        "kind": "tool",
+        "repo": "GoogleChrome/lighthouse-ci",
+        "capabilities": ["performance audits", "budget thresholds", "accessibility checks", "SEO checks"]
+      },
+      {
+        "name": "axe-core Playwright",
+        "kind": "library",
+        "repo": "dequelabs/axe-core-npm",
+        "capabilities": ["accessibility scans", "aria validation", "contrast checks"]
+      }
+    ],
+    "design_systems": [
+      {"name": "Radix UI", "kind": "library", "repo": "radix-ui/primitives"},
+      {"name": "shadcn/ui", "kind": "library", "site": "ui.shadcn.com"},
+      {"name": "Tailwind CSS", "kind": "framework", "site": "tailwindcss.com"},
+      {"name": "CVA", "kind": "library", "repo": "joe-bell/cva"},
+      {"name": "Storybook", "kind": "tool", "site": "storybook.js.org"}
+    ],
+    "motion": [
+      {"name": "Framer Motion", "kind": "library", "repo": "motiondivision/motion"},
+      {"name": "GSAP", "kind": "library", "site": "gsap.com"},
+      {"name": "Lenis", "kind": "library", "site": "lenis.dev"}
+    ],
+    "3d": [
+      {"name": "React Three Fiber", "kind": "library", "repo": "pmndrs/react-three-fiber"},
+      {"name": "Three.js", "kind": "library", "site": "threejs.org"},
+      {"name": "Drei", "kind": "library", "repo": "pmndrs/drei"}
+    ],
+    "visual_references": [
+      {"name": "Awwwards", "kind": "reference", "site": "awwwards.com"},
+      {"name": "Godly", "kind": "reference", "site": "godly.website"},
+      {"name": "Land-book", "kind": "reference", "site": "land-book.com"},
+      {"name": "Mobbin", "kind": "reference", "site": "mobbin.com"},
+      {"name": "Dribbble", "kind": "reference", "site": "dribbble.com"}
+    ]
+  },
+  "recommended_scripts": [
+    {"name": "ui:test", "description": "Run UI interaction tests in a real browser."},
+    {"name": "ui:shots", "description": "Capture UI screenshots at 375px, 768px, 1440px."},
+    {"name": "ui:diff", "description": "Compare current UI screenshots to baseline."},
+    {"name": "ui:a11y", "description": "Run axe-core accessibility scans on key pages."},
+    {"name": "ui:lighthouse", "description": "Run Lighthouse audits with score thresholds."},
+    {"name": "ui:perf", "description": "Measure Core Web Vitals on key pages."}
+  ]
+}

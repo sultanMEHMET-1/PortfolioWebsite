@@ -298,8 +298,8 @@ function buildBoardPositions(variant: BoardVariant): Float32Array {
     return new Float32Array(lines);
 }
 
-// Default line width in pixels — 15% thicker than the WebGL baseline of 1px
-const DEFAULT_LINE_WIDTH = 1.15;
+// Default line width in pixels
+const DEFAULT_LINE_WIDTH = 1.6;
 
 export function MicrocontrollerBoard({
     variant,

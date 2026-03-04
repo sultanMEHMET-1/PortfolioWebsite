@@ -89,7 +89,7 @@ function buildStarGeometry(): THREE.BufferGeometry {
             const r              = t * GALAXY_RADIUS;
             const spiralAngle    = armAngleOffset + t * Math.PI * 2.5;
             // Wider spread than before so arms bleed into inter-arm space
-            const spread         = (0.192 + t * 0.56) * (Math.random() - 0.5);
+            const spread         = (0.384 + t * 1.12) * (Math.random() - 0.5);
             x = Math.cos(spiralAngle + spread) * r;
             z = Math.sin(spiralAngle + spread) * r;
             y = (Math.random() - 0.5) * GALAXY_THICKNESS * (1 - t * 0.7);

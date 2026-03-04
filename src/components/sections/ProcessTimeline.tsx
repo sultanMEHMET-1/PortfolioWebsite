@@ -41,9 +41,9 @@ export function ProcessTimeline(): ReactNode {
                     },
                     // Shorten Lenis duration while pinned so inertia doesn't
                     // carry scroll past the snap midpoint.
-                    onEnter: () => { if (lenisRef.current) lenisRef.current.options.duration = 0.85; },
+                    onEnter: () => { if (lenisRef.current) lenisRef.current.options.duration = 1.4; },
                     onLeave: () => { if (lenisRef.current) lenisRef.current.options.duration = 1.5; },
-                    onEnterBack: () => { if (lenisRef.current) lenisRef.current.options.duration = 0.85; },
+                    onEnterBack: () => { if (lenisRef.current) lenisRef.current.options.duration = 1.4; },
                     onLeaveBack: () => { if (lenisRef.current) lenisRef.current.options.duration = 1.5; },
                 }
             });

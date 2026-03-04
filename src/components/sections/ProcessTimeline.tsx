@@ -23,6 +23,13 @@ export function ProcessTimeline(): ReactNode {
                     start: "top top",
                     end: "+=300%",
                     scrub: 1,
+                    snap: {
+                        // one snap point per step; midpoint between steps determines direction
+                        snapTo: 1 / (steps.length - 1),
+                        delay: 0.05,
+                        duration: { min: 0.15, max: 0.25 },
+                        ease: "power1.inOut",
+                    },
                 }
             });
 

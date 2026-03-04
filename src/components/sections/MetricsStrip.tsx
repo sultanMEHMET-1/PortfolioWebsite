@@ -3,26 +3,43 @@
 import { useRef, useEffect, useState } from "react";
 import { useInView, useMotionValue, animate } from "framer-motion";
 import { Container } from "@/components/ui/Container";
+import { ScrollReveal } from "@/components/motion";
 import { useMotion } from "@/components/motion/MotionProvider";
 import type { ReactNode } from "react";
 
-interface StatDef {
+type NumericStat = {
     readonly value: number;
     readonly decimals: number;
+    readonly suffix?: string;
     readonly label: string;
-}
+    readonly text?: never;
+};
+
+type TextStat = {
+    readonly text: string;
+    readonly label: string;
+    readonly value?: never;
+    readonly decimals?: never;
+    readonly suffix?: never;
+};
+
+type StatDef = NumericStat | TextStat;
 
 const STATS: readonly StatDef[] = [
     { value: 4.0, decimals: 1, label: "GPA" },
     { value: 1, decimals: 0, label: "Hackathons Won" },
+    { value: 150, decimals: 0, suffix: "M+", label: "Readers Reached" },
+    { value: 3, decimals: 0, label: "Years Mentoring" },
+    { text: "K–5", label: "Grades Taught" },
 ];
 
 interface CountUpProps {
     readonly value: number;
     readonly decimals: number;
+    readonly suffix?: string;
 }
 
-function CountUp({ value, decimals }: CountUpProps): ReactNode {
+function CountUp({ value, decimals, suffix }: CountUpProps): ReactNode {
     const ref = useRef<HTMLSpanElement>(null);
     const isInView = useInView(ref, { once: true, margin: "-40px 0px" });
     const motionValue = useMotionValue(0);
@@ -46,21 +63,32 @@ function CountUp({ value, decimals }: CountUpProps): ReactNode {
         return controls.stop;
     }, [isInView, motionValue, value, decimals, reducedMotion]);
 
-    return <span ref={ref}>{display}</span>;
+    return (
+        <span ref={ref}>
+            {display}
+            {suffix && <span>{suffix}</span>}
+        </span>
+    );
 }
 
 export function MetricsStrip(): ReactNode {
     return (
         <div className="border-y border-border/50">
             <Container>
-                <div className="grid grid-cols-2">
+                <div className="grid grid-cols-2 sm:grid-cols-5">
                     {STATS.map((stat, index) => (
                         <div
                             key={stat.label}
                             className={`flex flex-col items-center gap-1 py-6 ${index < STATS.length - 1 ? "border-r border-border/50" : ""}`}
                         >
                             <span className="font-mono text-3xl font-bold text-foreground">
-                                <CountUp value={stat.value} decimals={stat.decimals} />
+                                {stat.text !== undefined ? (
+                                    <ScrollReveal variant="fadeIn">
+                                        {stat.text}
+                                    </ScrollReveal>
+                                ) : (
+                                    <CountUp value={stat.value} decimals={stat.decimals} suffix={stat.suffix} />
+                                )}
                             </span>
                             <span className="font-mono text-xs uppercase tracking-widest text-muted">
                                 {stat.label}

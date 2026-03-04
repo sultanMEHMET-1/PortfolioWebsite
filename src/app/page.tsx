@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { MetricsStrip } from "@/components/sections/MetricsStrip";
 import { About } from "@/components/sections/About";
 import { ExperienceTimeline } from "@/components/sections/ExperienceTimeline";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
@@ -16,6 +17,7 @@ export default function HomePage(): ReactNode {
   return (
     <>
       <Hero />
+      <MetricsStrip />
       <About />
       <ExperienceTimeline items={experience} />
       <ProcessTimeline />

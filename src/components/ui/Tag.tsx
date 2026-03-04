@@ -36,7 +36,7 @@ export function Tag({
             <button
                 type="button"
                 onClick={onClick}
-                className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium transition-colors ${stateStyle} ${className}`}
+                className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-mono font-medium transition-colors ${stateStyle} ${className}`}
             >
                 {children}
             </button>
@@ -45,7 +45,7 @@ export function Tag({
 
     return (
         <span
-            className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium ${stateStyle} ${className}`}
+            className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-mono font-medium ${stateStyle} ${className}`}
         >
             {children}
         </span>

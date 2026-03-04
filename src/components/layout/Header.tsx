@@ -27,7 +27,7 @@ export function Header(): ReactNode {
                     {/* Logo */}
                     <Link
                         href="/"
-                        className="text-lg font-semibold tracking-tight text-foreground"
+                        className="text-lg font-mono font-semibold tracking-tight text-foreground"
                     >
                         MM
                     </Link>

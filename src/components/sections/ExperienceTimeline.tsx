@@ -48,13 +48,13 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps): ReactNod
                     {items.map((item) => (
                         <StaggerItem key={item.id}>
                             <div className="relative pb-12 pl-8 md:pl-20">
-                                {/* PCB via */}
+                                {/* Status LED (active = green pulse, past = indigo static) */}
                                 <div
                                     className="absolute top-1.5 left-0 h-4 w-4 -translate-x-1/2 md:left-8"
                                     aria-hidden
                                 >
-                                    <div className="absolute inset-0 rounded-full border border-indigo-500/60 bg-background" />
-                                    <div className="absolute inset-[4px] rounded-full bg-indigo-500/50" />
+                                    <div className={`absolute inset-0 rounded-full border bg-background ${item.endDate === null ? "border-emerald-500/60" : "border-indigo-500/60"}`} />
+                                    <div className={`absolute inset-[4px] rounded-full ${item.endDate === null ? "bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(34,197,94,0.6)]" : "bg-indigo-500/50"}`} />
                                 </div>
                                 {/* Horizontal branch stub */}
                                 <div
@@ -69,7 +69,7 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps): ReactNod
                                     <p className="text-sm font-medium text-accent">
                                         {item.company}
                                     </p>
-                                    <p className="text-sm text-muted">
+                                    <p className="text-sm font-mono text-muted">
                                         {formatDateRange(item.startDate, item.endDate)} · {item.location}
                                     </p>
                                 </div>

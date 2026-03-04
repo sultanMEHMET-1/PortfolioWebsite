@@ -101,25 +101,25 @@ function buildStarGeometry(): THREE.BufferGeometry {
 
         if (isCore) {
             color.setHSL(0.07 + Math.random() * 0.05, 0.7, 2.0 + Math.random() * 2.5);
-            sizes[i] = 0.022 + Math.random() * 0.028;
+            sizes[i] = 0.033 + Math.random() * 0.042;
         } else if (isDisk) {
             // Very faint warm stars — subtle fill, not competing with arms
             color.setHSL(0.06 + Math.random() * 0.24, 0.2, 0.15 + Math.random() * 0.6);
-            sizes[i] = 0.004 + Math.random() * 0.004;
+            sizes[i] = 0.006 + Math.random() * 0.006;
         } else {
             const rand = Math.random();
             if (rand > 0.95) {
                 color.setHSL(0.82 + Math.random() * 0.08, 0.5, 1.5 + Math.random());
-                sizes[i] = 0.012 + Math.random() * 0.013;
+                sizes[i] = 0.018 + Math.random() * 0.0195;
             } else if (rand > 0.80) {
                 color.setHSL(0.58 + Math.random() * 0.12, 0.6, 2.0 + Math.random());
-                sizes[i] = 0.012 + Math.random() * 0.013;
+                sizes[i] = 0.018 + Math.random() * 0.0195;
             } else if (rand > 0.50) {
                 color.setHSL(0.60 + Math.random() * 0.12, 0.4, 0.5 + Math.random() * 0.6);
-                sizes[i] = 0.006 + Math.random() * 0.008;
+                sizes[i] = 0.009 + Math.random() * 0.012;
             } else {
                 color.setHSL(0.05 + Math.random() * 0.10, 0.3, 0.3 + Math.random() * 0.4);
-                sizes[i] = 0.006 + Math.random() * 0.006;
+                sizes[i] = 0.009 + Math.random() * 0.009;
             }
         }
 

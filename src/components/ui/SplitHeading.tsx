@@ -39,10 +39,13 @@ export function SplitHeading({ text, className = "", tag = "h1" }: SplitHeadingP
             style={{ perspective: 1000 }}
         >
             {words.map((word, i) => (
-                <span key={i} className="inline-block overflow-hidden mr-[0.25em]">
-                    <motion.span variants={wordVariants} className="inline-block" style={{ transformOrigin: "bottom center" }}>
-                        {word}
-                    </motion.span>
+                <span key={i}>
+                    <span className="inline-block overflow-hidden">
+                        <motion.span variants={wordVariants} className="inline-block" style={{ transformOrigin: "bottom center" }}>
+                            {word}
+                        </motion.span>
+                    </span>
+                    {i < words.length - 1 && " "}
                 </span>
             ))}
         </MotionTag>

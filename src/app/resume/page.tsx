@@ -68,7 +68,7 @@ export default function ResumePage(): ReactNode {
                                     PDF Viewer not supported
                                 </h2>
                                 <p className="mb-6 max-w-md text-muted">
-                                    Your browser doesn't seem to support embedded PDFs, or you're on a mobile device. No worries, you can still view it by downloading the file below!
+                                    Your browser doesn&apos;t seem to support embedded PDFs, or you&apos;re on a mobile device. No worries, you can still view it by downloading the file below!
                                 </p>
                                 <Button
                                     href="/resume.pdf"

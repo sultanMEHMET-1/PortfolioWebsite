@@ -55,7 +55,7 @@ export function MobileNav({
                     aria-hidden
                 />
                 <nav
-                    className="absolute top-0 right-0 h-full w-72 bg-surface p-6 shadow-xl"
+                    className="absolute inset-0 h-full w-full bg-neutral-950 p-6 shadow-xl"
                     aria-label="Mobile navigation"
                 >
                     <div className="mb-8 flex justify-end">
@@ -79,15 +79,15 @@ export function MobileNav({
                             </svg>
                         </button>
                     </div>
-                    <ul className="flex flex-col gap-2">
+                    <ul className="flex flex-col items-center justify-center gap-6 pt-10">
                         {links.map((link) => (
                             <li key={link.href}>
                                 <Link
                                     href={link.href}
                                     onClick={onClose}
-                                    className={`block rounded-md px-4 py-3 text-base font-medium ${pathname === link.href
-                                            ? "bg-accent-muted text-accent"
-                                            : "text-foreground hover:bg-neutral-100"
+                                    className={`block rounded-md px-6 py-3 text-2xl font-medium ${pathname === link.href
+                                        ? "text-accent"
+                                        : "text-foreground hover:text-accent"
                                         }`}
                                     aria-current={pathname === link.href ? "page" : undefined}
                                 >
@@ -116,12 +116,12 @@ export function MobileNav({
                         aria-hidden
                     />
 
-                    {/* Drawer */}
+                    {/* Full Screen Drawer */}
                     <motion.nav
-                        className="absolute top-0 right-0 h-full w-72 bg-surface p-6 shadow-xl"
-                        initial={{ x: "100%" }}
-                        animate={{ x: 0 }}
-                        exit={{ x: "100%" }}
+                        className="absolute inset-0 h-full w-full bg-neutral-950 p-6 shadow-xl"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: duration.base, ease: ease.emphasized }}
                         aria-label="Mobile navigation"
                     >
@@ -146,7 +146,7 @@ export function MobileNav({
                                 </svg>
                             </button>
                         </div>
-                        <ul className="flex flex-col gap-2">
+                        <ul className="flex flex-col items-center justify-center gap-6 pt-10">
                             {links.map((link, i) => (
                                 <motion.li
                                     key={link.href}
@@ -161,9 +161,9 @@ export function MobileNav({
                                     <Link
                                         href={link.href}
                                         onClick={onClose}
-                                        className={`block rounded-md px-4 py-3 text-base font-medium ${pathname === link.href
-                                                ? "bg-accent-muted text-accent"
-                                                : "text-foreground hover:bg-neutral-100"
+                                        className={`block rounded-md px-6 py-3 text-2xl font-medium ${pathname === link.href
+                                            ? "text-accent"
+                                            : "text-foreground hover:text-accent"
                                             }`}
                                         aria-current={pathname === link.href ? "page" : undefined}
                                     >

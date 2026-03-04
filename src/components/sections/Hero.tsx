@@ -3,8 +3,11 @@
 import { ScrollReveal } from "@/components/motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { SplitHeading } from "@/components/ui/SplitHeading";
 import { profile } from "@/content/profile";
-import { Scene } from "@/components/three/Scene";
+import { SharedCanvas } from "@/components/three/SharedCanvas";
+import { ParticleField } from "@/components/three/objects/ParticleField";
 import { ThreeErrorBoundary } from "@/components/three/ThreeErrorBoundary";
 import type { ReactNode } from "react";
 
@@ -23,10 +26,12 @@ export function Hero(): ReactNode {
             />
 
             <ThreeErrorBoundary>
-                <Scene />
+                <SharedCanvas className="z-0">
+                    <ParticleField count={400} />
+                </SharedCanvas>
             </ThreeErrorBoundary>
 
-            <Container>
+            <Container className="relative z-10">
                 <div className="max-w-2xl">
                     <ScrollReveal>
                         <p className="mb-4 text-sm font-medium uppercase tracking-widest text-accent">
@@ -35,9 +40,10 @@ export function Hero(): ReactNode {
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.1}>
-                        <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl">
-                            {profile.name}
-                        </h1>
+                        <SplitHeading
+                            text={profile.name}
+                            className="bg-gradient-to-br from-[#ffffff] to-[#6366f1] bg-clip-text text-transparent text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl py-2"
+                        />
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.2}>
@@ -53,13 +59,17 @@ export function Hero(): ReactNode {
                     </ScrollReveal>
 
                     <ScrollReveal delay={0.4}>
-                        <div className="mt-8 flex flex-wrap gap-3">
-                            <Button href="/projects" variant="primary" size="lg">
-                                View Work
-                            </Button>
-                            <Button href="/contact" variant="secondary" size="lg">
-                                Get in Touch
-                            </Button>
+                        <div className="mt-8 flex flex-wrap gap-4">
+                            <MagneticButton>
+                                <Button href="/projects" variant="primary" size="lg">
+                                    View Work
+                                </Button>
+                            </MagneticButton>
+                            <MagneticButton>
+                                <Button href="/contact" variant="secondary" size="lg">
+                                    Get in Touch
+                                </Button>
+                            </MagneticButton>
                         </div>
                     </ScrollReveal>
                 </div>

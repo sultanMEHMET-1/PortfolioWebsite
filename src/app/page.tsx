@@ -1,5 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
+import { About } from "@/components/sections/About";
 import { ExperienceTimeline } from "@/components/sections/ExperienceTimeline";
+import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
 import { ProjectGrid } from "@/components/sections/ProjectGrid";
 import { SkillsMatrix } from "@/components/sections/SkillsMatrix";
 import { EducationList } from "@/components/sections/EducationList";
@@ -14,7 +16,9 @@ export default function HomePage(): ReactNode {
   return (
     <>
       <Hero />
+      <About />
       <ExperienceTimeline items={experience} />
+      <ProcessTimeline />
       <ProjectGrid projects={projects} />
       <SkillsMatrix groups={skills} />
       <EducationList items={education} />

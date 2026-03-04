@@ -60,6 +60,14 @@ Always: set explicit `width` and `height` to prevent CLS.
 - `contain: layout style paint` on isolated animated components
 - Target 60fps — if below, profile with Chrome Devtools Performance panel
 
+### GPU Motion Budget
+| Item | Budget | Notes |
+|---|---|---|
+| Concurrent animated elements | 12 (prefer 6) | Includes scroll reveals and hover lifts |
+| Continuous loops | 1 per page | Loading/ambient only |
+| Scroll-linked animations | 2 per viewport | Parallax + pin counts toward this |
+| Animated blur/shadow | 0 on large surfaces | Use static layers + opacity |
+
 ## Decision framework
 - **If** image is below the fold → `loading="lazy"`
 - **If** image is in the hero (above fold) → `loading="eager"`, add `fetchpriority="high"`, preload `<link rel="preload">`

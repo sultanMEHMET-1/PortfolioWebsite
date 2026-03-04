@@ -22,12 +22,12 @@
   --color-accent-dark: #4f46e5;
   --color-accent-muted: rgba(99, 102, 241, 0.12);
 
-  /* Semantic */
-  --color-background: var(--color-neutral-50);
-  --color-foreground: var(--color-neutral-900);
-  --color-muted: var(--color-neutral-500);
-  --color-border: var(--color-neutral-200);
-  --color-surface: #ffffff;
+  /* Semantic - Dark Mode Default */
+  --color-background: oklch(0.1 0.005 240);
+  --color-foreground: #ffffff;
+  --color-muted: var(--color-neutral-400);
+  --color-border: var(--color-neutral-800);
+  --color-surface: var(--color-neutral-900);
 
   /* Typography */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -42,12 +42,13 @@
 /* ── Base Styles ── */
 
 html {
-  scroll-behavior: smooth;
+  cursor: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
+/* On touch devices, bring cursor back */
+@media (pointer: coarse) {
   html {
-    scroll-behavior: auto;
+    cursor: auto;
   }
 }
 

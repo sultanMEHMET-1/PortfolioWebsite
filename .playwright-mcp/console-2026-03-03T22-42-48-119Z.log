@@ -1,0 +1,83 @@
+[    2213ms] [WARNING] Image with src "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?w=800&h=1000&fit=crop&q=80" has "fill" but is missing "sizes" prop. Please add it to improve page performance. Read more: https://nextjs.org/docs/api-reference/next/image#sizes @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    2258ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    2576ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    2645ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    2767ms] [WARNING] WARNING: Too many active WebGL contexts. Oldest context will be lost. @ http://localhost:3000/_next/static/chunks/node_modules_three_build_three_module_0c59ee63.js:10836
+[    3026ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[    8960ms] NotFoundError: Failed to execute 'removeChild' on 'Node': The node to be removed is not a child of this node.
+    at removeChild (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:11876:24)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:965:74)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8078:21)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8122:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8122:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8125:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8105:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8105:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8105:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8125:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8125:17)
+    at recursivelyTraverseDeletionEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8039:53)
+    at commitDeletionEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8101:17)
+    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8202:13)
+    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8221:17)
+    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8212:106)
+    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8293:17)
+    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8212:106)
+    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8410:17)
+    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8212:106)
+    at commitMutationEffectsOnFiber (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8221:17)
+    at recursivelyTraverseMutationEffects (http://localhost:3000/_next/static/chunks/node_modules_next_dist_compiled_react-dom_1e674e59._.js:8212:106)
+[   48793ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   49515ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   72752ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=m1qcUtuNathbAuv05xGX-' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[   73754ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=m1qcUtuNathbAuv05xGX-' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[   74755ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=m1qcUtuNathbAuv05xGX-' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[   79489ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[   85996ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=c7tQyjnDsyyFnTi2K2XwN' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[   86997ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=c7tQyjnDsyyFnTi2K2XwN' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[   87999ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=c7tQyjnDsyyFnTi2K2XwN' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[   89001ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=c7tQyjnDsyyFnTi2K2XwN' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[   90002ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=c7tQyjnDsyyFnTi2K2XwN' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[   95005ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=c7tQyjnDsyyFnTi2K2XwN' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  100006ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=c7tQyjnDsyyFnTi2K2XwN' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  108482ms] [WARNING] THREE.THREE.Clock: This module has been deprecated. Please use THREE.Timer instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297
+[  136285ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  137286ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  138288ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  139290ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  140292ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  145293ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  150295ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  155296ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  160299ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  165302ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  170304ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878
+[  175306ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=MCs-JueP8pgZMhhTSknpa' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_client_17643121._.js:10878

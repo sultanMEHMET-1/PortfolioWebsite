@@ -20,6 +20,14 @@
 | Canvas overlay opacity | 0.3-0.7 | Max 0.9 (content must be readable) |
 | Fallback on low-end GPU | Static image | No WebGL crash |
 
+### GPU Mercy Defaults
+| Setting | Default | Notes |
+|---|---|---|
+| `dpr` | `[1, 1.5]` | Raise to 2 only if needed |
+| `powerPreference` | `"low-power"` | For background/ambient scenes |
+| Animated meshes | ≤ 3 | Keep motion subtle and slow |
+| Post-processing | 0 by default | Add at most 1 effect if required |
+
 ### Camera Setup
 ```
 Field of View: 60-75° (75° default for depth, 60° for flatter look)
@@ -43,6 +51,7 @@ Position z: 5 (start here, adjust per scene)
 - **If** mobile device → detect and render static image fallback
 - **If** user prefers reduced motion → stop all animation (`useFrame` should check this)
 - **If** scene doesn't run at 60fps → reduce geometry, merge geometries, or cut the effect
+- **If** scene is mostly static → use `frameloop="demand"` and avoid continuous `useFrame`
 - **If** the effect takes > 2 days to implement well → use Spline embed instead (simpler, performant)
 
 ## Code examples
@@ -57,8 +66,8 @@ export function Scene() {
     <div className="fixed inset-0 -z-10 pointer-events-none">
       <Canvas
         camera={{ fov: 75, position: [0, 0, 5] }}
-        dpr={[1, 2]}                    // limit pixel ratio for performance
-        gl={{ antialias: false }}       // disable AA for better performance
+        dpr={[1, 1.5]}                  // limit pixel ratio for GPU mercy
+        gl={{ antialias: false, powerPreference: 'low-power' }}
         performance={{ min: 0.5 }}      // allow adaptive quality
       >
         <FloatingGeometry />
@@ -204,6 +213,7 @@ export function SplineScene() {
 | `setState` inside `useFrame` | Re-renders on every frame (60x/sec) | Use `ref.current.property =` direct mutation |
 | `new THREE.Vector3()` inside `useFrame` | GC pressure, causes frame drops | `useMemo(() => new THREE.Vector3(), [])` |
 | Complex scene on mobile | Battery drain, laggy on low-end | Detect and show static fallback |
+| Stacked post-processing (bloom + DOF + aberration) | Heavy GPU cost for little gain | Use at most one effect or none |
 | 3D effect with higher z-index than content | Content unreadable | Always use `-z-10`, `pointer-events-none` |
 | Full-color saturated 3D scene | Competes with page content | Use low-opacity, wireframe, or monochrome |
 | Forgetting to dispose geometries/materials | Memory leaks | Return cleanup in `useEffect` |
@@ -211,7 +221,7 @@ export function SplineScene() {
 ## Tool-specific guidance
 - **@react-three/drei**: use `<Detailed>` (LOD) for complex models. Use `<Environment>` for IBL lighting. Use `<Html>` to mix DOM elements in 3D.
 - **@react-three/postprocessing**: use `<Bloom>`, `<DepthOfField>`, `<ChromaticAberration>` for cinematic effects. Expensive — test FPS.
-- **dpr**: always set `dpr={[1, 2]}` on Canvas — prevents 3x DPR on Retina devices.
+- **dpr**: cap at `dpr={[1, 1.5]}` for background scenes; never exceed 2.
 - **Performance monitoring**: `import { Perf } from 'r3f-perf'` for dev monitoring. Remove before shipping.
 
 ## Done checks
@@ -221,5 +231,5 @@ export function SplineScene() {
 - [ ] No `setState` calls inside `useFrame` — only direct ref mutations.
 - [ ] `prefers-reduced-motion` stops all animation in `useFrame`.
 - [ ] Triangle count below 50k for background scenes.
-- [ ] `dpr` capped at `[1, 2]` on Canvas.
+- [ ] `dpr` capped at `[1, 1.5]` for background scenes (never above 2).
 - [ ] Geometries and materials disposed when component unmounts.

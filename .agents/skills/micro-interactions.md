@@ -39,6 +39,13 @@ All micro-interaction easing: `cubic-bezier(0.33, 1, 0.68, 1)` (ease-out cubic).
 | Duration | 200ms |
 | Cursor | `pointer` |
 
+### Shadow Budget (GPU)
+| Surface | Max blur | Max spread | Notes |
+|---|---|---|---|
+| Buttons / inputs | 12px | 0-2px | Keep subtle, no glow |
+| Cards | 24px | 0-4px | Avoid animated blur on large cards |
+| Large panels | 32px | 0-6px | Keep static; do not animate |
+
 ### Link Hover
 | Property | Value |
 |---|---|
@@ -72,6 +79,7 @@ All micro-interaction easing: `cubic-bezier(0.33, 1, 0.68, 1)` (ease-out cubic).
 - **If** icon button (no text) → must have `aria-label` and visible focus ring
 - **If** link in body text → underline offset animation, no scale
 - **If** drag interaction → show cursor change + subtle scale on drag start (1.02)
+- **If** glow or depth is needed → use a static pseudo-element and animate opacity only
 - **If** loading state → skeleton screen or spinner in place, never block user
 
 ## Code examples
@@ -180,6 +188,7 @@ All micro-interaction easing: `cubic-bezier(0.33, 1, 0.68, 1)` (ease-out cubic).
 | `transition: all` | Catches unintended properties | List specific: `transform, box-shadow` |
 | Missing focus styles | Inaccessible for keyboard users | Always define `focus-visible` ring |
 | Hover glow with large `box-shadow` blur | Distracting, reduces readability | Use `shadow-md` max (8-25px offset) |
+| Animating `filter` / `drop-shadow` | Expensive paint on hover | Keep shadow static, animate opacity/transform |
 | Layout shift on hover | Jarring, pushes content | Use `transform` which doesn't affect layout |
 | Same hover effect on everything | Undifferentiated feedback | Cards lift, links underline, buttons press |
 
@@ -196,3 +205,4 @@ All micro-interaction easing: `cubic-bezier(0.33, 1, 0.68, 1)` (ease-out cubic).
 - [ ] All transitions under 200ms for hover states.
 - [ ] Cards lift with `translateY(-2px)` + shadow, not scale.
 - [ ] `cursor: pointer` on all clickable non-button elements.
+- [ ] No hover/focus state animates `filter`, `backdrop-filter`, or large `box-shadow` blur.

@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import type { ReactNode } from "react";
 
 interface SectionProps {
@@ -6,14 +7,15 @@ interface SectionProps {
     readonly id?: string;
 }
 
-export function Section({
+export const Section = forwardRef<HTMLElement, SectionProps>(({
     children,
     className = "",
     id,
-}: SectionProps): ReactNode {
+}, ref) => {
     return (
-        <section id={id} className={`py-20 md:py-28 ${className}`}>
+        <section ref={ref} id={id} className={`py-20 md:py-28 ${className}`}>
             {children}
         </section>
     );
-}
+});
+Section.displayName = "Section";

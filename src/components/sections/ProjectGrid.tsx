@@ -1,7 +1,9 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollReveal, StaggerChildren, StaggerItem } from "@/components/motion";
 import { useMotion } from "@/components/motion/MotionProvider";
 import { duration, ease } from "@/components/motion/tokens";
@@ -20,13 +22,34 @@ interface ProjectGridProps {
 export function ProjectGrid({ projects }: ProjectGridProps): ReactNode {
     const [activeTags, setActiveTags] = useState<string[]>([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(
-        null,
-    );
+    const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const { reducedMotion } = useMotion();
+
+    gsap.registerPlugin(ScrollTrigger);
 
     const allTags = getAllTags(projects);
     const filtered = filterAndSearchProjects(projects, activeTags, searchQuery);
+
+    useLayoutEffect(() => {
+        if (reducedMotion) return;
+        const ctx = gsap.context(() => {
+            const images = gsap.utils.toArray<HTMLElement>('.parallax-image');
+            images.forEach((img) => {
+                gsap.to(img, {
+                    yPercent: 20,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: img.parentElement,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1
+                    }
+                });
+            });
+        }, containerRef);
+        return () => ctx.revert();
+    }, [filtered, reducedMotion]);
 
     const toggleTag = useCallback((tag: string) => {
         setActiveTags((prev) =>
@@ -90,42 +113,52 @@ export function ProjectGrid({ projects }: ProjectGridProps): ReactNode {
 
                 {/* Grid */}
                 <LayoutGroup>
-                    <StaggerChildren className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        <AnimatePresence mode="popLayout">
-                            {filtered.map((project) => (
-                                <StaggerItem key={project.id}>
-                                    <motion.div
-                                        layout={!reducedMotion}
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 0.95 }}
-                                        transition={{
-                                            duration: duration.base,
-                                            ease: ease.standard,
-                                        }}
-                                    >
-                                        <Card
-                                            hover
-                                            onClick={() => setSelectedProject(project)}
-                                            className="h-full cursor-pointer"
+                    <div ref={containerRef}>
+                        <StaggerChildren className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                            <AnimatePresence mode="popLayout">
+                                {filtered.map((project) => (
+                                    <StaggerItem key={project.id}>
+                                        <motion.div
+                                            layout={!reducedMotion}
+                                            initial={{ opacity: 0, scale: 0.95 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            exit={{ opacity: 0, scale: 0.95 }}
+                                            transition={{
+                                                duration: duration.base,
+                                                ease: ease.standard,
+                                            }}
                                         >
-                                            <h3 className="mb-2 text-lg font-semibold text-foreground">
-                                                {project.name}
-                                            </h3>
-                                            <p className="mb-4 text-sm leading-relaxed text-muted line-clamp-3">
-                                                {project.description}
-                                            </p>
-                                            <div className="flex flex-wrap gap-1.5">
-                                                {project.tech.map((t) => (
-                                                    <Tag key={t}>{t}</Tag>
-                                                ))}
-                                            </div>
-                                        </Card>
-                                    </motion.div>
-                                </StaggerItem>
-                            ))}
-                        </AnimatePresence>
-                    </StaggerChildren>
+                                            <Card
+                                                hover
+                                                onClick={() => setSelectedProject(project)}
+                                                className="h-full flex flex-col cursor-pointer overflow-hidden p-0"
+                                            >
+                                                <div className="relative h-48 w-full overflow-hidden bg-neutral-900">
+                                                    <div
+                                                        className="parallax-image absolute -top-[20%] left-0 h-[140%] w-full bg-cover bg-center"
+                                                        style={{ backgroundImage: `url(https://images.unsplash.com/photo-1618042164219-62c420f04023?w=600&h=400&fit=crop&q=80)` }}
+                                                    />
+                                                </div>
+                                                <div className="flex flex-col flex-1 p-6">
+                                                    <h3 className="mb-2 text-lg font-semibold text-foreground">
+                                                        {project.name}
+                                                    </h3>
+                                                    <p className="mb-4 text-sm leading-relaxed text-muted line-clamp-3">
+                                                        {project.description}
+                                                    </p>
+                                                    <div className="mt-auto flex flex-wrap gap-1.5 pt-4">
+                                                        {project.tech.map((t) => (
+                                                            <Tag key={t}>{t}</Tag>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            </Card>
+                                        </motion.div>
+                                    </StaggerItem>
+                                ))}
+                            </AnimatePresence>
+                        </StaggerChildren>
+                    </div>
                 </LayoutGroup>
 
                 {filtered.length === 0 && (

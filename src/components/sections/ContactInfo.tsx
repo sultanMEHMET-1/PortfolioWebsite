@@ -6,8 +6,6 @@ import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { Button } from "@/components/ui/Button";
 import { SplitHeading } from "@/components/ui/SplitHeading";
-import { SharedCanvas } from "@/components/three/SharedCanvas";
-import { OscilloscopeWave } from "@/components/three/objects/OscilloscopeWave";
 import { profile } from "@/content/profile";
 import type { ReactNode } from "react";
 
@@ -30,11 +28,8 @@ export function ContactInfo(): ReactNode {
     }, [emailAddress]);
 
     return (
-        <Section id="contact" className="relative overflow-hidden">
-            <SharedCanvas bloom={true} camera={{ position: [0, 0, 5], fov: 75 }}>
-                <OscilloscopeWave />
-            </SharedCanvas>
-            <Container className="relative z-10">
+        <Section id="contact">
+            <Container>
                 <ScrollReveal>
                     <div className="mx-auto max-w-lg text-center">
                         <SplitHeading

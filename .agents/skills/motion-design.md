@@ -22,6 +22,15 @@
 
 Stagger: 50-80ms between siblings. Total stagger chain max: 400ms.
 
+### GPU Guardrails
+| Guardrail | Value | Notes |
+|---|---|---|
+| Max simultaneous animated elements | 12 (prefer 6) | Batch or reduce long lists |
+| Max items per stagger group | 12 | Split large groups into batches |
+| Continuous loops | 1 per page | Only for loading/ambient state |
+| Paint-heavy effects | 0 animated `filter` / `blur` / `backdrop-filter` | Use static layers + opacity |
+| Full-bleed surfaces | Avoid animating full-screen layers | Animate a child layer instead |
+
 ### Easing Curves
 | Name | Curve | Use case |
 |---|---|---|
@@ -56,6 +65,8 @@ Stagger: 50-80ms between siblings. Total stagger chain max: 400ms.
 - **If** element enters the viewport → use `opacity` + `translateY(20px)`, never `scale` alone
 - **If** element exits → always animate out, don't just remove
 - **If** animation involves position changes → use `transform`, never `top/left/width/height` (causes reflow)
+- **If** a list exceeds 12 items → animate the first batch, keep the rest static or reveal in chunks
+- **If** effect requires blur/glow/backdrop → use a static layer and animate opacity only
 - **If** `prefers-reduced-motion` is set → remove all non-essential animation, keep instant state changes
 
 ## Code examples
@@ -151,6 +162,7 @@ function AnimatedCard({ children }) {
 | Duration > 600ms | Feels sluggish, blocks user | Cap at 600ms, most should be 200-350ms |
 | Looping animation without reason | Distracting, wastes battery | Only loop on intentional loading/progress states |
 | Animating `top`, `left`, `width`, `height` | Triggers layout reflow, jank | Use `transform: translate/scale` instead |
+| Animating `filter`, `blur`, or `backdrop-filter` | Forces expensive paint each frame | Use static layer + opacity |
 | No exit animation | Element disappears abruptly | Always define exit variants with `AnimatePresence` |
 | Ignoring `prefers-reduced-motion` | Accessibility failure | Wrap or disable non-essential animation |
 
@@ -165,6 +177,8 @@ function AnimatedCard({ children }) {
 - [ ] No single animation exceeds 600ms.
 - [ ] All easing curves are non-linear (ease-out or spring for entrances).
 - [ ] Stagger chains complete in under 400ms total.
+- [ ] No more than 12 elements animate simultaneously (prefer 6).
 - [ ] `prefers-reduced-motion` removes all non-essential animation.
 - [ ] Only `transform` and `opacity` are animated — no layout properties.
+- [ ] No animated `filter` / `backdrop-filter` / large `box-shadow` on big surfaces.
 - [ ] Exit animations exist for every element that enters dynamically.

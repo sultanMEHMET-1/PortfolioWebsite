@@ -1,6 +1,10 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Navigation", () => {
+    test.beforeEach(async ({ page }) => {
+        await page.emulateMedia({ reducedMotion: "reduce" });
+    });
+
     test("home page loads without console errors", async ({ page }) => {
         const errors: string[] = [];
         page.on("console", (msg) => {

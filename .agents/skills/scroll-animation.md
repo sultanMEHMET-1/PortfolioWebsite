@@ -30,6 +30,15 @@
 | Stagger | `0.08` seconds between sibling items |
 | Trigger start | `"top 85%"` (fire early so animation completes before center) |
 
+### Performance Guardrails
+| Guardrail | Value | Notes |
+|---|---|---|
+| Max scroll-linked elements per viewport | 2 | Includes parallax and scrubbed timelines |
+| Max pinned sections per page | 1 (2 max) | Keep pin duration under 200% viewport |
+| Max reveal items per trigger | 12 | Split long lists into batches |
+| Smooth scroll (Lenis) | Off by default | Enable only if required, disable on mobile |
+| Parallax distance | `yPercent` ≤ 15 | Larger motion costs more and distracts |
+
 ### Lenis Smooth Scroll Config
 ```js
 {
@@ -47,6 +56,8 @@
 - **If** scroll-linked parallax → GSAP ScrollTrigger with `scrub: 1`
 - **If** pinned section with timeline → GSAP ScrollTrigger with `pin: true` and `scrub`
 - **If** smooth scroll throughout → add Lenis first, then integrate with GSAP
+- **If** more than 2 scroll-linked elements are visible → reduce to 1-2 or use static reveals
+- **If** list exceeds 12 items → split into multiple reveal groups or use IO + CSS
 - **If** `prefers-reduced-motion` → disable scroll reveals, keep page scrollable, remove parallax
 
 ## Code examples
@@ -90,7 +101,7 @@ gsap.from('.reveal-item', {
 ### GSAP — Parallax Hero Element
 ```js
 gsap.to('.hero-visual', {
-  yPercent: -20,          // move up 20% of its height
+  yPercent: -12,          // move up 12% of its height
   ease: 'none',           // linear for scrub
   scrollTrigger: {
     trigger: '.hero',
@@ -190,6 +201,8 @@ export function useScrollReveal(ref) {
 | `scrub: true` (boolean) | Zero smoothing, feels jittery | Use `scrub: 1` or `scrub: 1.5` |
 | Animating `top`/`left` with scrollTrigger | Triggers layout reflow per frame | Use `y` / `yPercent` (transforms) |
 | Scroll reveals with `start: "top 50%"` | Animation fires too late, half-visible | Use `"top 85%"` so animation completes by center |
+| Multiple pinned sections or long pin durations | Heavy on low-end devices | Max 1 pin per page, keep under 200% viewport |
+| Lenis enabled on every page by default | Adds overhead for little gain | Only enable on pages that need it, disable on mobile |
 | No cleanup in React/Next | Memory leaks, stale triggers | Always return `ctx.revert()` from `useEffect` |
 
 ## Tool-specific guidance
@@ -207,3 +220,4 @@ export function useScrollReveal(ref) {
 - [ ] `gsap.context().revert()` called on component unmount in React.
 - [ ] Scroll animations disabled or instant when `prefers-reduced-motion` is set.
 - [ ] Lenis initialized once in root layout and synced with GSAP ticker.
+- [ ] No more than 2 scroll-linked elements are visible at once.

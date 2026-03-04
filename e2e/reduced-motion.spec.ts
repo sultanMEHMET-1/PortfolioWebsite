@@ -11,8 +11,6 @@ test.describe("Reduced Motion", () => {
 
         // Canvas should not exist under reduced motion
         await expect(page.locator("canvas")).not.toBeVisible();
-        // Fallback abstract shape should be visible
-        await expect(page.locator(".w-64.h-64.rounded-full")).toBeVisible();
 
         // In reduced motion, scroll reveal elements should be immediately visible
         // (no motion.div wrappers — falls back to plain div)

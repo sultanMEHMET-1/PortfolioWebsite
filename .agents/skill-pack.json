@@ -62,7 +62,8 @@
   "playbooks": [
     {"id": "frontend-remake", "file": "playbooks/frontend-remake.md"},
     {"id": "landing-page", "file": "playbooks/landing-page.md"},
-    {"id": "portfolio-upgrade", "file": "playbooks/portfolio-upgrade.md"}
+    {"id": "portfolio-upgrade", "file": "playbooks/portfolio-upgrade.md"},
+    {"id": "maximum-ambition", "file": "playbooks/maximum-ambition.md", "note": "Use when maximum visual impact is required. Overrides conservative defaults."}
   ],
   "tooling": {
     "validation": [

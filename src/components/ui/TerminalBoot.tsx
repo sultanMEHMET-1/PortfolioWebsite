@@ -6,12 +6,12 @@ import type { ReactNode } from "react";
 
 const LINES = [
     { text: "> esp32_portfolio init",     delay: 0 },
-    { text: "[  OK  ] Bootloader: verified",    delay: 250 },
-    { text: "[  OK  ] Flash: 4MB mounted",      delay: 500 },
-    { text: "[  OK  ] GPIO: 38 pins ready",     delay: 750 },
-    { text: "[  OK  ] WiFi: connecting...",     delay: 1000 },
-    { text: "[  OK  ] WiFi: link up",           delay: 1250 },
-    { text: "[  OK  ] Portfolio: launching",    delay: 1500 },
+    { text: "[  OK  ] Bootloader: verified",    delay: 300 },
+    { text: "[  OK  ] Flash: 4MB mounted",      delay: 600 },
+    { text: "[  OK  ] GPIO: 38 pins ready",     delay: 900 },
+    { text: "[  OK  ] WiFi: connecting...",     delay: 1200 },
+    { text: "[  OK  ] WiFi: link up",           delay: 1500 },
+    { text: "[  OK  ] Portfolio: launching",    delay: 1800 },
 ];
 
 export function TerminalBoot(): ReactNode {
@@ -35,11 +35,11 @@ export function TerminalBoot(): ReactNode {
             );
         });
 
-        // Last line at 1500ms + fade out after 500ms pause
+        // Last line at 1800ms + fade out after 500ms pause
         timers.push(
             setTimeout(() => {
                 setDone(true);
-            }, 1500 + 500 + 400),
+            }, 1800 + 500 + 400),
         );
 
         return () => timers.forEach(clearTimeout);

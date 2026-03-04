@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useLayoutEffect } from "react";
+import { useRef, useLayoutEffect, useEffect } from "react";
+import { useLenis } from "lenis/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Section } from "@/components/ui/Section";
@@ -11,6 +12,14 @@ gsap.registerPlugin(ScrollTrigger);
 export function ProcessTimeline(): ReactNode {
     const sectionRef = useRef<HTMLElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const lenis = useLenis();
+    // Keep a ref so GSAP callbacks always see the current Lenis instance
+    // without needing to re-create the ScrollTrigger when it changes.
+    const lenisRef = useRef(lenis);
+
+    useEffect(() => {
+        lenisRef.current = lenis;
+    }, [lenis]);
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
@@ -30,6 +39,12 @@ export function ProcessTimeline(): ReactNode {
                         duration: { min: 0.15, max: 0.25 },
                         ease: "power1.inOut",
                     },
+                    // Stop Lenis while pinned so its inertia doesn't carry scroll
+                    // past the midpoint before snap fires.
+                    onEnter: () => lenisRef.current?.stop(),
+                    onLeave: () => lenisRef.current?.start(),
+                    onEnterBack: () => lenisRef.current?.stop(),
+                    onLeaveBack: () => lenisRef.current?.start(),
                 }
             });
 
@@ -57,7 +72,11 @@ export function ProcessTimeline(): ReactNode {
 
         }, sectionRef);
 
-        return () => ctx.revert();
+        return () => {
+            ctx.revert();
+            // Ensure Lenis is running again if the component unmounts mid-section.
+            lenisRef.current?.start();
+        };
     }, []);
 
     const processes = [

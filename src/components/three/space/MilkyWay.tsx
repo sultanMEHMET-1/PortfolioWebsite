@@ -104,7 +104,7 @@ function buildStarGeometry(): THREE.BufferGeometry {
             sizes[i] = 0.022 + Math.random() * 0.028;
         } else if (isDisk) {
             // Very faint warm stars — subtle fill, not competing with arms
-            color.setHSL(0.06 + Math.random() * 0.08, 0.2, 0.15 + Math.random() * 0.2);
+            color.setHSL(0.06 + Math.random() * 0.24, 0.2, 0.15 + Math.random() * 0.6);
             sizes[i] = 0.004 + Math.random() * 0.004;
         } else {
             const rand = Math.random();

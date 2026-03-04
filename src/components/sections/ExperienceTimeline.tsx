@@ -1,8 +1,11 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ScrollReveal, StaggerChildren, StaggerItem } from "@/components/motion";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { SharedCanvas } from "@/components/three/SharedCanvas";
+import { AmbientGeometry } from "@/components/three/objects/AmbientGeometry";
 import { formatDateRange } from "@/lib/utils";
 import type { ExperienceItem } from "@/content/types";
 import type { ReactNode } from "react";
@@ -15,8 +18,11 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps): ReactNod
     if (items.length === 0) return null;
 
     return (
-        <Section id="experience">
-            <Container>
+        <Section id="experience" className="relative overflow-hidden">
+            <SharedCanvas className="z-0" bloom={false}>
+                <AmbientGeometry />
+            </SharedCanvas>
+            <Container className="relative z-10">
                 <ScrollReveal>
                     <h2 className="mb-12 text-3xl font-bold tracking-tight text-foreground">
                         Experience
@@ -24,18 +30,35 @@ export function ExperienceTimeline({ items }: ExperienceTimelineProps): ReactNod
                 </ScrollReveal>
 
                 <StaggerChildren className="relative">
-                    {/* Timeline line */}
+                    {/* PCB trace background track */}
                     <div
-                        className="absolute top-0 left-0 h-full w-px bg-border md:left-8"
+                        className="absolute top-0 left-0 h-full w-px bg-indigo-900/25 md:left-8"
+                        aria-hidden
+                    />
+                    {/* PCB trace animated reveal */}
+                    <motion.div
+                        className="absolute top-0 left-0 h-full w-px bg-indigo-500/60 origin-top md:left-8"
+                        initial={{ scaleY: 0 }}
+                        whileInView={{ scaleY: 1 }}
+                        viewport={{ once: true, amount: 0 }}
+                        transition={{ duration: 2.5, ease: "linear" }}
                         aria-hidden
                     />
 
                     {items.map((item) => (
                         <StaggerItem key={item.id}>
                             <div className="relative pb-12 pl-8 md:pl-20">
-                                {/* Timeline dot */}
+                                {/* PCB via */}
                                 <div
-                                    className="absolute top-1.5 left-0 h-3 w-3 -translate-x-1/2 rounded-full border-2 border-accent bg-background md:left-8"
+                                    className="absolute top-1.5 left-0 h-4 w-4 -translate-x-1/2 md:left-8"
+                                    aria-hidden
+                                >
+                                    <div className="absolute inset-0 rounded-full border border-indigo-500/60 bg-background" />
+                                    <div className="absolute inset-[4px] rounded-full bg-indigo-500/50" />
+                                </div>
+                                {/* Horizontal branch stub */}
+                                <div
+                                    className="absolute top-[7px] left-0 h-px w-2 bg-indigo-500/40 md:left-8 translate-x-[2px]"
                                     aria-hidden
                                 />
 

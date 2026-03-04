@@ -29,7 +29,6 @@ const STATS: readonly StatDef[] = [
     { value: 4.0, decimals: 1, label: "GPA" },
     { value: 1, decimals: 0, label: "Hackathons Won" },
     { value: 150, decimals: 0, suffix: "M+", label: "Readers Reached" },
-    { value: 3, decimals: 0, label: "Years Mentoring" },
     { text: "K–5", label: "Grades Taught" },
 ];
 
@@ -75,7 +74,7 @@ export function MetricsStrip(): ReactNode {
     return (
         <div className="border-y border-border/50">
             <Container>
-                <div className="grid grid-cols-2 sm:grid-cols-5">
+                <div className="grid grid-cols-2 sm:grid-cols-4">
                     {STATS.map((stat, index) => (
                         <div
                             key={stat.label}

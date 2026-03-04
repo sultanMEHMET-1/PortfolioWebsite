@@ -1,8 +1,11 @@
 "use client";
 
 import { useRef, useMemo, useEffect } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { LineSegments2 } from "three/examples/jsm/lines/LineSegments2.js";
+import { LineSegmentsGeometry } from "three/examples/jsm/lines/LineSegmentsGeometry.js";
+import { LineMaterial } from "three/examples/jsm/lines/LineMaterial.js";
 import type { ReactNode } from "react";
 
 type LEDConfig = { pos: [number, number, number]; color: string; freq: number };
@@ -45,13 +48,15 @@ interface MicrocontrollerBoardProps {
     scale?: number;
     opacity?: number;
     color?: string;
+    lineWidth?: number;
 }
 
 /**
- * Build detailed 3D line-segment geometry for a microcontroller board.
- * Resembles an engineer's isometric outline drawing with component depth.
+ * Build detailed 3D line-segment position data for a microcontroller board.
+ * Returns a flat Float32Array of (x1,y1,z1, x2,y2,z2) pairs suitable for
+ * LineSegmentsGeometry.setPositions().
  */
-function buildBoardGeometry(variant: BoardVariant): THREE.BufferGeometry {
+function buildBoardPositions(variant: BoardVariant): Float32Array {
     const lines: number[] = [];
 
     // 2D helpers (z=0)
@@ -290,19 +295,23 @@ function buildBoardGeometry(variant: BoardVariant): THREE.BufferGeometry {
         }
     }
 
-    const geo = new THREE.BufferGeometry();
-    geo.setAttribute("position", new THREE.Float32BufferAttribute(lines, 3));
-    return geo;
+    return new Float32Array(lines);
 }
+
+// Default line width in pixels — 40% thicker than the WebGL baseline of 1px
+const DEFAULT_LINE_WIDTH = 1.4;
 
 export function MicrocontrollerBoard({
     variant,
     position = [0, 0, 0],
     scale = 1,
     opacity = 0.12,
-    color = "#6366f1",
+    color = "#ffffff",
+    lineWidth = DEFAULT_LINE_WIDTH,
 }: MicrocontrollerBoardProps): ReactNode {
     const groupRef = useRef<THREE.Group>(null);
+    const materialRef = useRef<LineMaterial | null>(null);
+    const { size } = useThree();
 
     // Track mouse globally (never freezes behind DOM overlays)
     const mouse = useRef({ x: 0, y: 0 });
@@ -318,7 +327,33 @@ export function MicrocontrollerBoard({
         return () => window.removeEventListener("mousemove", onMove);
     }, []);
 
-    const geometry = useMemo(() => buildBoardGeometry(variant), [variant]);
+    // LineMaterial needs viewport resolution for correct pixel-space line width
+    useEffect(() => {
+        if (materialRef.current) {
+            materialRef.current.resolution.set(size.width, size.height);
+        }
+    }, [size]);
+
+    const lineSegmentsObject = useMemo(() => {
+        const positions = buildBoardPositions(variant);
+        const geo = new LineSegmentsGeometry();
+        geo.setPositions(positions);
+
+        const mat = new LineMaterial({
+            color: new THREE.Color(color),
+            linewidth: lineWidth,
+            transparent: true,
+            opacity,
+            // Resolution is updated via the effect above; provide initial value
+            resolution: new THREE.Vector2(
+                typeof window !== "undefined" ? window.innerWidth : 1920,
+                typeof window !== "undefined" ? window.innerHeight : 1080,
+            ),
+        });
+        materialRef.current = mat;
+
+        return new LineSegments2(geo, mat);
+    }, [variant, color, lineWidth, opacity]);
 
     useFrame(({ clock }) => {
         if (!groupRef.current) return;
@@ -342,9 +377,7 @@ export function MicrocontrollerBoard({
 
     return (
         <group ref={groupRef} position={position} scale={scale}>
-            <lineSegments geometry={geometry}>
-                <lineBasicMaterial color={color} transparent opacity={opacity} />
-            </lineSegments>
+            <primitive object={lineSegmentsObject} />
             {variant === "esp32" && <LEDArray leds={ESP32_LEDS} />}
         </group>
     );

@@ -13,14 +13,14 @@ export function AmbientGeometry(): ReactNode {
                 position={[-3.5, -0.5, -4.5]}
                 scale={1.6}
                 opacity={0.14}
-                color="#6366f1"
+                color="#ffffff"
             />
             <MicrocontrollerBoard
                 variant="stm32"
                 position={[-1.8, -2.8, -6]}
                 scale={1.3}
                 opacity={0.10}
-                color="#818cf8"
+                color="#ffffff"
             />
 
             <Float speed={1} rotationIntensity={0.5} floatIntensity={1}>

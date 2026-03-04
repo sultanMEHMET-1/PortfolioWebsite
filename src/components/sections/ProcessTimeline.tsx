@@ -39,12 +39,12 @@ export function ProcessTimeline(): ReactNode {
                         duration: { min: 0.15, max: 0.25 },
                         ease: "power1.inOut",
                     },
-                    // Stop Lenis while pinned so its inertia doesn't carry scroll
-                    // past the midpoint before snap fires.
-                    onEnter: () => lenisRef.current?.stop(),
-                    onLeave: () => lenisRef.current?.start(),
-                    onEnterBack: () => lenisRef.current?.stop(),
-                    onLeaveBack: () => lenisRef.current?.start(),
+                    // Shorten Lenis duration while pinned so inertia doesn't
+                    // carry scroll past the snap midpoint.
+                    onEnter: () => { if (lenisRef.current) lenisRef.current.options.duration = 0.5; },
+                    onLeave: () => { if (lenisRef.current) lenisRef.current.options.duration = 1.5; },
+                    onEnterBack: () => { if (lenisRef.current) lenisRef.current.options.duration = 0.5; },
+                    onLeaveBack: () => { if (lenisRef.current) lenisRef.current.options.duration = 1.5; },
                 }
             });
 
@@ -74,8 +74,8 @@ export function ProcessTimeline(): ReactNode {
 
         return () => {
             ctx.revert();
-            // Ensure Lenis is running again if the component unmounts mid-section.
-            lenisRef.current?.start();
+            // Restore default duration if component unmounts mid-section.
+            if (lenisRef.current) lenisRef.current.options.duration = 1.5;
         };
     }, []);
 

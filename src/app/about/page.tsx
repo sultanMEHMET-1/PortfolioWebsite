@@ -29,9 +29,21 @@ export default function AboutPage(): ReactNode {
                             <p>{profile.summary}</p>
 
                             <p>
-                                TODO: Add a more detailed narrative about your background,
-                                values, and what drives you. This should be a personal,
-                                authentic story — not a resume summary.
+                                I care about building things that work reliably under real
+                                constraints — whether that is embedded code on a race car,
+                                automated tests that catch regressions early, or systems that
+                                have to behave predictably when hardware and software meet.
+                                That mindset comes from liking both the big picture and the
+                                details: how a design is structured, how failures show up, and
+                                how to iterate until the behavior is right.
+                            </p>
+                            <p>
+                                Outside of coursework and projects, volunteering in hospitals
+                                and clinics shaped how I think about technology: tools and
+                                algorithms are most meaningful when they help people directly.
+                                Long term, I want to keep growing at the intersection of
+                                intelligent systems, rigorous engineering, and problems that
+                                matter in the world.
                             </p>
                         </div>
                     </ScrollReveal>
@@ -44,16 +56,16 @@ export default function AboutPage(): ReactNode {
                             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                                 {[
                                     {
-                                        title: "TODO: Area 1",
-                                        description: "Describe a focus area or value.",
+                                        title: "Robotics and Embedded Systems",
+                                        description: "Robotics sits at the intersection of software and hardware, which is exactly where I like to work. As an electronics member in Purdue Electric Racing, I build control systems, debugging tools, and manage the low level hardware that has to perform reliably in real competitions. It’s a fast feedback environment that forces careful design.",
                                     },
                                     {
-                                        title: "TODO: Area 2",
-                                        description: "Describe another focus area.",
+                                        title: "Technology with Real Impact",
+                                        description: "The problems that motivate me most are the ones that affect people’s lives directly. Volunteering in hospitals and clinics for two years showed me how powerful the right technology can be for diagnosis and treatment. Long term, I want to develop algorithms and intelligent systems that improve medical care.",
                                     },
                                     {
-                                        title: "TODO: Area 3",
-                                        description: "Describe a third focus area.",
+                                        title: "Algorithms and Systems",
+                                        description: "I like solving problems by breaking them into clear, efficient algorithms. Much of my work focuses on how software systems are structured and how decisions are encoded in code. Whether it’s robotics or backend systems, I enjoy turning complex behavior into logic a machine can execute.",
                                     },
                                 ].map((area) => (
                                     <div

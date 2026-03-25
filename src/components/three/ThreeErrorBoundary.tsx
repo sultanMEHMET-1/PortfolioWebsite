@@ -27,7 +27,10 @@ export class ThreeErrorBoundary extends Component<Props, State> {
     public render() {
         if (this.state.hasError) {
             return this.props.fallback || (
-                <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none aria-hidden">
+                <div
+                    className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none"
+                    aria-hidden="true"
+                >
                     <div className="w-64 h-64 border-[1px] border-foreground rounded-full rotate-45 transform skew-x-12 skew-y-12" />
                 </div>
             );

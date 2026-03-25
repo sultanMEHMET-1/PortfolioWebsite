@@ -1,13 +1,15 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { PageTransition } from "@/components/motion";
+import { buildMetadata } from "@/lib/seo";
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-    title: "Resume — Mehmet Mercan",
+export const metadata: Metadata = buildMetadata({
+    title: "Resume",
     description: "View my professional resume and qualifications.",
-};
+    path: "/resume",
+});
 
 export default function ResumePage(): ReactNode {
     return (
@@ -19,9 +21,6 @@ export default function ResumePage(): ReactNode {
                             <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                                 Resume
                             </h1>
-                            <p className="mt-2 text-lg text-muted">
-                                My professional background and qualifications.
-                            </p>
                         </div>
                         <Button
                             href="/resume.pdf"

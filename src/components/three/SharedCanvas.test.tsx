@@ -1,24 +1,23 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen } from "@testing-library/react";
-import { Scene } from "./Scene";
+import { render, waitFor } from "@testing-library/react";
+import { SharedCanvas } from "./SharedCanvas";
 import * as webgl from "@/utils/webgl";
 import { MotionProvider } from "@/components/motion/MotionProvider";
 
-// Mock matchMedia for MotionProvider
 const mockMatchMedia = (matches: boolean) => {
-    return vi.fn().mockImplementation((query) => ({
+    return vi.fn().mockImplementation((query: string) => ({
         matches,
         media: query,
         onchange: null,
-        addListener: vi.fn(), // deprecated
-        removeListener: vi.fn(), // deprecated
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
         addEventListener: vi.fn(),
         removeEventListener: vi.fn(),
         dispatchEvent: vi.fn(),
     }));
 };
 
-describe("Scene Component", () => {
+describe("SharedCanvas", () => {
     beforeEach(() => {
         vi.clearAllMocks();
     });
@@ -27,47 +26,54 @@ describe("Scene Component", () => {
         vi.restoreAllMocks();
     });
 
-    it("should render fallback if WebGL is unsupported", () => {
+    it("renders nothing when WebGL is unsupported", async () => {
         vi.spyOn(webgl, "isWebGLAvailable").mockReturnValue(false);
         window.matchMedia = mockMatchMedia(false);
 
         render(
             <MotionProvider>
-                <Scene />
+                <SharedCanvas bloom={false}>
+                    <mesh />
+                </SharedCanvas>
             </MotionProvider>
         );
 
-        // The fallback container has aria-hidden
-        const fallbacks = document.querySelectorAll(".w-64.h-64.rounded-full");
-        expect(fallbacks.length).toBeGreaterThan(0);
+        await waitFor(() => {
+            expect(document.querySelector("canvas")).toBeNull();
+        });
     });
 
-    it("should render fallback if user prefers reduced motion", () => {
+    it("renders nothing when user prefers reduced motion", async () => {
         vi.spyOn(webgl, "isWebGLAvailable").mockReturnValue(true);
         window.matchMedia = mockMatchMedia(true);
 
         render(
             <MotionProvider>
-                <Scene />
+                <SharedCanvas bloom={false}>
+                    <mesh />
+                </SharedCanvas>
             </MotionProvider>
         );
 
-        const fallbacks = document.querySelectorAll(".w-64.h-64.rounded-full");
-        expect(fallbacks.length).toBeGreaterThan(0);
+        await waitFor(() => {
+            expect(document.querySelector("canvas")).toBeNull();
+        });
     });
 
-    it("should render canvas if WebGL is supported and no reduced motion", () => {
+    it("renders canvas when WebGL is supported and reduced motion is off", async () => {
         vi.spyOn(webgl, "isWebGLAvailable").mockReturnValue(true);
         window.matchMedia = mockMatchMedia(false);
 
         render(
             <MotionProvider>
-                <Scene />
+                <SharedCanvas bloom={false}>
+                    <mesh />
+                </SharedCanvas>
             </MotionProvider>
         );
 
-        // Should not render the fallback
-        const fallbacks = document.querySelectorAll(".w-64.h-64.rounded-full");
-        expect(fallbacks.length).toBe(0);
+        await waitFor(() => {
+            expect(document.querySelector("canvas")).toBeInTheDocument();
+        });
     });
 });

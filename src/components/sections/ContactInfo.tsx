@@ -44,18 +44,15 @@ export function ContactInfo(): ReactNode {
 
                         <div className="flex flex-col items-center gap-4">
                             {emailAddress && (
-                                <div className="flex items-center gap-2">
-                                    <Button href={emailLink?.url} variant="primary" size="lg">
-                                        Say Hello
-                                    </Button>
-                                    <button
-                                        type="button"
+                                <div className="flex justify-center">
+                                    <Button
                                         onClick={copyEmail}
-                                        className="rounded-lg border border-border px-3 py-2.5 text-sm text-muted transition-colors hover:bg-neutral-100 hover:text-foreground"
+                                        variant="primary"
+                                        size="lg"
                                         aria-label="Copy email address"
                                     >
-                                        {copied ? "Copied!" : "Copy"}
-                                    </button>
+                                        {copied ? "Copied!" : "Copy email"}
+                                    </Button>
                                 </div>
                             )}
 

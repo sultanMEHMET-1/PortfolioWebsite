@@ -10,10 +10,11 @@ interface MilkyWayProps {
     progress: MutableRefObject<number>;
 }
 
-/** Visible from 0.86 onward: fades in 0.86–1.00 */
+/** Visible from 0.65 onward: fades in 0.65–0.75, full 0.75–1.00 */
 function getOpacity(p: number): number {
-    if (p < 0.86) return 0;
-    return (p - 0.86) / 0.14;
+    if (p < 0.65) return 0;
+    if (p > 0.75) return 1;
+    return (p - 0.65) / 0.10;
 }
 
 // Per-vertex size drives gl_PointSize; camera at z=5, galaxy at z=-1.
@@ -46,19 +47,19 @@ void main() {
 }
 `;
 
-const STAR_COUNT       = 30000;
-const ARM_COUNT        = 4;
-const GALAXY_RADIUS    = 4.5;
+const STAR_COUNT = 30000;
+const ARM_COUNT = 4;
+const GALAXY_RADIUS = 4.5;
 const GALAXY_THICKNESS = 0.4;
-const CORE_FRACTION    = 0.25;  // 25% core
-const DISK_FRACTION    = 0.20;  // 20% faint background disk (fills inter-arm gaps)
+const CORE_FRACTION = 0.25;  // 25% core
+const DISK_FRACTION = 0.20;  // 20% faint background disk (fills inter-arm gaps)
 // remaining 55% are spiral arm stars
 
 function buildStarGeometry(): THREE.BufferGeometry {
     const positions = new Float32Array(STAR_COUNT * 3);
-    const colors    = new Float32Array(STAR_COUNT * 3);
-    const sizes     = new Float32Array(STAR_COUNT);
-    const color     = new THREE.Color();
+    const colors = new Float32Array(STAR_COUNT * 3);
+    const sizes = new Float32Array(STAR_COUNT);
+    const color = new THREE.Color();
 
     const coreEnd = Math.floor(STAR_COUNT * CORE_FRACTION);
     const diskEnd = Math.floor(STAR_COUNT * (CORE_FRACTION + DISK_FRACTION));
@@ -70,32 +71,32 @@ function buildStarGeometry(): THREE.BufferGeometry {
         let x: number, y: number, z: number;
 
         if (isCore) {
-            const r     = Math.pow(Math.random(), 2) * GALAXY_RADIUS * 0.3;
+            const r = Math.pow(Math.random(), 2) * GALAXY_RADIUS * 0.3;
             const theta = Math.random() * Math.PI * 2;
             x = Math.cos(theta) * r;
             z = Math.sin(theta) * r;
             y = (Math.random() - 0.5) * GALAXY_THICKNESS * (1 - r / (GALAXY_RADIUS * 0.3));
         } else if (isDisk) {
             // Uniform area distribution fills the inter-arm gaps
-            const r     = Math.sqrt(Math.random()) * GALAXY_RADIUS;
+            const r = Math.sqrt(Math.random()) * GALAXY_RADIUS;
             const theta = Math.random() * Math.PI * 2;
             x = Math.cos(theta) * r;
             z = Math.sin(theta) * r;
             y = (Math.random() - 0.5) * GALAXY_THICKNESS * 0.6;
         } else {
-            const arm            = Math.floor(Math.random() * ARM_COUNT);
+            const arm = Math.floor(Math.random() * ARM_COUNT);
             const armAngleOffset = (arm / ARM_COUNT) * Math.PI * 2;
-            const t              = Math.pow(Math.random(), 0.6);
-            const r              = t * GALAXY_RADIUS;
-            const spiralAngle    = armAngleOffset + t * Math.PI * 2.5;
+            const t = Math.pow(Math.random(), 0.6);
+            const r = t * GALAXY_RADIUS;
+            const spiralAngle = armAngleOffset + t * Math.PI * 2.5;
             // Wider spread than before so arms bleed into inter-arm space
-            const spread         = (0.384 + t * 1.12) * (Math.random() - 0.5);
+            const spread = (0.384 + t * 1.12) * (Math.random() - 0.5);
             x = Math.cos(spiralAngle + spread) * r;
             z = Math.sin(spiralAngle + spread) * r;
             y = (Math.random() - 0.5) * GALAXY_THICKNESS * (1 - t * 0.7);
         }
 
-        positions[i * 3]     = x;
+        positions[i * 3] = x;
         positions[i * 3 + 1] = y;
         positions[i * 3 + 2] = z;
 
@@ -123,23 +124,23 @@ function buildStarGeometry(): THREE.BufferGeometry {
             }
         }
 
-        colors[i * 3]     = color.r;
+        colors[i * 3] = color.r;
         colors[i * 3 + 1] = color.g;
         colors[i * 3 + 2] = color.b;
     }
 
     const geo = new THREE.BufferGeometry();
     geo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
-    geo.setAttribute("color",    new THREE.BufferAttribute(colors,    3));
-    geo.setAttribute("size",     new THREE.BufferAttribute(sizes,     1));
+    geo.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    geo.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
     return geo;
 }
 
 export function MilkyWay({ progress }: MilkyWayProps): ReactNode {
-    const groupRef  = useRef<THREE.Group>(null);
-    const matRef    = useRef<THREE.ShaderMaterial>(null);
-    const geometry  = useMemo(() => buildStarGeometry(), []);
-    const uniforms  = useMemo(() => ({ uOpacity: { value: 0 } }), []);
+    const groupRef = useRef<THREE.Group>(null);
+    const matRef = useRef<THREE.ShaderMaterial>(null);
+    const geometry = useMemo(() => buildStarGeometry(), []);
+    const uniforms = useMemo(() => ({ uOpacity: { value: 0 } }), []);
 
     useFrame((_, delta) => {
         const opacity = getOpacity(progress.current);

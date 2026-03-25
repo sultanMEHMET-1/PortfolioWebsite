@@ -7,7 +7,7 @@ import * as THREE from "three";
 import type { ReactNode } from "react";
 
 // World-space point size (sizeAttenuation makes this perspective-correct)
-const POINT_SIZE = 0.15;
+const POINT_SIZE = 0.1275;
 
 // Soft circular sprite: white center fading to transparent edge
 function createCircleTexture(): THREE.Texture {

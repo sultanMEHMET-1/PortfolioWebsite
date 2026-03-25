@@ -6,9 +6,27 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import type { ReactNode } from "react";
 
+// World-space point size (sizeAttenuation makes this perspective-correct)
+const POINT_SIZE = 0.15;
+
+// Soft circular sprite: white center fading to transparent edge
+function createCircleTexture(): THREE.Texture {
+    const size = 32;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d")!;
+    const gradient = ctx.createRadialGradient(size / 2, size / 2, 0, size / 2, size / 2, size / 2);
+    gradient.addColorStop(0, "rgba(255,255,255,1)");
+    gradient.addColorStop(0.4, "rgba(255,255,255,0.8)");
+    gradient.addColorStop(1, "rgba(255,255,255,0)");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, size, size);
+    return new THREE.CanvasTexture(canvas);
+}
+
 export function ParticleField({ count = 500 }: { count?: number }): ReactNode {
-    const mesh = useRef<THREE.InstancedMesh>(null);
-    const dummy = useMemo(() => new THREE.Object3D(), []);
+    const geometryRef = useRef<THREE.BufferGeometry>(null);
 
     // Track mouse globally so it never freezes when DOM overlays block the canvas
     const mouse = useRef({ x: 0, y: 0 });
@@ -24,13 +42,19 @@ export function ParticleField({ count = 500 }: { count?: number }): ReactNode {
         return () => window.removeEventListener("mousemove", onMove);
     }, []);
 
-    const positions = useMemo(() => {
-        return Array.from({ length: count }, () => [
-            (Math.random() - 0.5) * 25,
-            (Math.random() - 0.5) * 25,
-            (Math.random() - 0.5) * 15 - 5,
-        ]);
+    // Static base positions — each particle's resting position
+    const basePositions = useMemo(() => {
+        const arr = new Float32Array(count * 3);
+        for (let i = 0; i < count; i++) {
+            arr[i * 3]     = (Math.random() - 0.5) * 25;
+            arr[i * 3 + 1] = (Math.random() - 0.5) * 25;
+            arr[i * 3 + 2] = (Math.random() - 0.5) * 15 - 5;
+        }
+        return arr;
     }, [count]);
+
+    // Live positions buffer mutated in-place every frame
+    const positions = useMemo(() => new Float32Array(basePositions), [basePositions]);
 
     const colors = useMemo(() => {
         const temp = new Float32Array(count * 3);
@@ -43,8 +67,14 @@ export function ParticleField({ count = 500 }: { count?: number }): ReactNode {
         return temp;
     }, [count]);
 
+    const texture = useMemo(() => createCircleTexture(), []);
+
+    useEffect(() => {
+        return () => texture.dispose();
+    }, [texture]);
+
     useFrame(({ clock }) => {
-        if (!mesh.current) return;
+        if (!geometryRef.current) return;
         const t = clock.getElapsedTime();
 
         // Smooth mouse with lerp so movement is never jarring
@@ -54,27 +84,38 @@ export function ParticleField({ count = 500 }: { count?: number }): ReactNode {
         const mx = smoothMouse.current.x;
         const my = smoothMouse.current.y;
 
-        positions.forEach(([x, y, z], i) => {
-            // Ambient wavy drift (always active) + smooth pointer parallax
-            const depthParallax = (z + 10) / 10;
-            dummy.position.set(
-                x + Math.sin(t * 0.3 + i * 0.7) * 0.3 + mx * depthParallax * 2,
-                y + Math.cos(t * 0.2 + i * 0.7) * 0.3 + my * depthParallax * 2,
-                z
-            );
-            dummy.scale.setScalar(0.03 + Math.sin(t + i) * 0.01);
-            dummy.updateMatrix();
-            mesh.current!.setMatrixAt(i, dummy.matrix);
-        });
-        mesh.current.instanceMatrix.needsUpdate = true;
+        // Write animated positions directly into the flat buffer — no matrix math
+        for (let i = 0; i < count; i++) {
+            const bx = basePositions[i * 3];
+            const by = basePositions[i * 3 + 1];
+            const bz = basePositions[i * 3 + 2];
+            // Ambient wavy drift + smooth pointer parallax
+            const depthParallax = (bz + 10) / 10;
+            positions[i * 3]     = bx + Math.sin(t * 0.3 + i * 0.7) * 0.3 + mx * depthParallax * 2;
+            positions[i * 3 + 1] = by + Math.cos(t * 0.2 + i * 0.7) * 0.3 + my * depthParallax * 2;
+            positions[i * 3 + 2] = bz;
+        }
+
+        geometryRef.current.attributes.position.needsUpdate = true;
     });
 
     return (
-        <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
-            <sphereGeometry args={[1, 6, 6]}>
-                <instancedBufferAttribute attach="attributes-color" args={[colors, 3]} />
-            </sphereGeometry>
-            <meshBasicMaterial toneMapped={false} vertexColors transparent opacity={0.8} />
-        </instancedMesh>
+        <points>
+            <bufferGeometry ref={geometryRef}>
+                <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+                <bufferAttribute attach="attributes-color" args={[colors, 3]} />
+            </bufferGeometry>
+            <pointsMaterial
+                size={POINT_SIZE}
+                sizeAttenuation
+                vertexColors
+                transparent
+                opacity={0.85}
+                alphaMap={texture}
+                alphaTest={0.01}
+                toneMapped={false}
+                depthWrite={false}
+            />
+        </points>
     );
 }

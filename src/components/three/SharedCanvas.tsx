@@ -29,14 +29,15 @@ export function SharedCanvas({ children, className = "", bloom = true, camera = 
         <div className={`absolute inset-0 pointer-events-none ${className}`} aria-hidden="true">
             <Canvas
                 camera={camera}
-                dpr={[1, 1.5]}
+                dpr={[1, 1]}
+                performance={{ min: 0.5 }}
                 gl={{ alpha: true, antialias: false, stencil: false, depth: false }}
             >
                 <Suspense fallback={null}>
                     {children}
                     {bloom && (
                         <EffectComposer>
-                            <Bloom luminanceThreshold={0.5} luminanceSmoothing={0.9} intensity={1.5} mipmapBlur resolutionScale={0.5} />
+                            <Bloom luminanceThreshold={0.5} luminanceSmoothing={0.9} intensity={1.5} resolutionScale={0.5} />
                         </EffectComposer>
                     )}
                 </Suspense>
